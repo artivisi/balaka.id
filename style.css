@@ -32,7 +32,9 @@ body {
   font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   color: var(--slate-800);
   line-height: 1.6;
-  background: white;
+  background-color: #fafaf8;
+  background-image: radial-gradient(circle, var(--slate-200) 0.5px, transparent 0.5px);
+  background-size: 24px 24px;
   -webkit-font-smoothing: antialiased;
 }
 img { max-width: 100%; height: auto; display: block; }
@@ -140,7 +142,7 @@ ul { list-style: none; }
 /* ===== Hero ===== */
 .hero {
   padding: 4rem 0 3rem;
-  background: linear-gradient(135deg, var(--brand-50) 0%, white 60%);
+  background: linear-gradient(135deg, var(--brand-50) 0%, #fafaf8 60%);
 }
 .hero-inner {
   display: grid;
@@ -178,7 +180,7 @@ ul { list-style: none; }
 
 /* ===== Sections ===== */
 .section { padding: 5rem 0; }
-.section-alt { background: var(--slate-50); }
+.section-alt { background: #f5f5f0; }
 .section-title {
   font-size: 1.75rem;
   font-weight: 700;
