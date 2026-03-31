@@ -258,6 +258,52 @@
         </div>
       </div>
     </div>
+
+    <div id="register" class="pricing-form-wrapper">
+      <h3 data-id="Daftar atau Tanya Lebih Lanjut" data-en="Register or Ask Questions"></h3>
+      <p class="pricing-form-sub" data-id="Isi formulir di bawah, kami akan menghubungi Anda dalam 1 hari kerja." data-en="Fill in the form below, we will contact you within 1 business day."></p>
+      <form action="https://api.web3forms.com/submit" method="POST" class="pricing-form">
+        <!-- TODO: Replace with your Web3Forms access key from https://web3forms.com -->
+        <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+        <input type="hidden" name="subject" value="Pendaftaran Balaka">
+        <input type="hidden" name="from_name" value="Balaka Registration">
+        <input type="checkbox" name="botcheck" class="hidden" style="display:none">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nama" data-id="Nama" data-en="Name"></label>
+            <input type="text" id="nama" name="nama" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="whatsapp">WhatsApp</label>
+            <input type="tel" id="whatsapp" name="whatsapp" placeholder="08xxxxxxxxxx">
+          </div>
+          <div class="form-group">
+            <label for="paket" data-id="Paket" data-en="Plan"></label>
+            <select id="paket" name="paket">
+              <option value="Starter">Starter — Rp 149.000/bln</option>
+              <option value="Business" selected>Business — Rp 349.000/bln</option>
+              <option value="Professional">Professional — Rp 749.000/bln</option>
+              <option value="Belum yakin" data-id="Belum yakin" data-en="Not sure yet"></option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="usaha" data-id="Jenis usaha" data-en="Type of business"></label>
+          <input type="text" id="usaha" name="jenis_usaha" data-id-placeholder="Contoh: Toko online, konsultan IT, kedai kopi" data-en-placeholder="e.g. Online store, IT consultant, coffee shop" placeholder="Contoh: Toko online, konsultan IT, kedai kopi">
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg btn-block" data-id="Kirim" data-en="Submit"></button>
+      </form>
+    </div>
   </div>
 </section>
 
@@ -480,6 +526,10 @@ function applyLang(l) {
   document.querySelectorAll('[data-id]').forEach(el => {
     const text = el.getAttribute('data-' + l);
     if (text) el.textContent = text;
+  });
+  document.querySelectorAll('[data-id-placeholder]').forEach(el => {
+    const ph = el.getAttribute('data-' + l + '-placeholder');
+    if (ph) el.placeholder = ph;
   });
   // Update URL without reload
   const url = new URL(location);
