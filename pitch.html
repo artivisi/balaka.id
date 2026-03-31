@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Balaka — Pitch Deck</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brand: #2E2D8E;
+    --brand-light: #4654AC;
+    --brand-dark: #1C1E5D;
+    --brand-50: #eef0fb;
+    --accent: #58C034;
+    --accent-dark: #47992a;
+    --slate-100: #f1f5f9;
+    --slate-200: #e2e8f0;
+    --slate-400: #94a3b8;
+    --slate-500: #64748b;
+    --slate-600: #475569;
+    --slate-800: #1e293b;
+    --slate-900: #0f172a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body { height: 100%; overflow: hidden; }
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    background: #0f1218;
+    color: white;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Slide container */
+  .slides { height: 100vh; width: 100vw; position: relative; }
+  .slide {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 6rem;
+    overflow: hidden;
+  }
+  .slide.active { display: flex; }
+
+  /* Slide backgrounds */
+  .slide-brand {
+    background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);
+  }
+  .slide-dark {
+    background: #0f1218;
+  }
+  .slide-light {
+    background: #fafaf8;
+    color: var(--slate-800);
+  }
+
+  /* Typography */
+  h1 { font-size: 3rem; font-weight: 800; line-height: 1.15; margin-bottom: 1rem; }
+  h2 { font-size: 2.25rem; font-weight: 700; line-height: 1.2; margin-bottom: 1.5rem; }
+  h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.75rem; }
+  .subtitle { font-size: 1.25rem; opacity: 0.8; max-width: 700px; line-height: 1.6; }
+  .small { font-size: 0.85rem; opacity: 0.6; }
+  .accent { color: var(--accent); }
+  .brand-text { color: var(--brand-light); }
+
+  /* Two-column layout */
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+  .cols-60-40 { grid-template-columns: 1.5fr 1fr; }
+  .cols-40-60 { grid-template-columns: 1fr 1.5fr; }
+
+  /* Lists */
+  .check-list { list-style: none; padding: 0; }
+  .check-list li {
+    padding: 0.5rem 0 0.5rem 2rem;
+    position: relative;
+    font-size: 1.05rem;
+    line-height: 1.5;
+  }
+  .check-list li::before {
+    content: '\2713';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+
+  .bullet-list { list-style: none; padding: 0; }
+  .bullet-list li {
+    padding: 0.4rem 0 0.4rem 1.5rem;
+    position: relative;
+    font-size: 0.95rem;
+    opacity: 0.85;
+  }
+  .bullet-list li::before {
+    content: '\2022';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 1.2rem;
+  }
+
+  /* Screenshots */
+  .screenshot {
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    max-height: 70vh;
+    object-fit: contain;
+  }
+  .screenshot-sm {
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    max-height: 35vh;
+    object-fit: contain;
+  }
+  .screenshot-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  th, td { padding: 0.6rem 1rem; text-align: left; }
+  th { font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .table-dark th { border-bottom: 2px solid rgba(255,255,255,0.2); color: var(--accent); }
+  .table-dark td { border-bottom: 1px solid rgba(255,255,255,0.08); }
+
+  .table-light th { border-bottom: 2px solid var(--slate-200); color: var(--brand); }
+  .table-light td { border-bottom: 1px solid var(--slate-200); color: var(--slate-600); }
+
+  /* Price cards */
+  .price-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .price-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+  }
+  .price-card.featured {
+    background: rgba(255,255,255,0.1);
+    border-color: var(--accent);
+    box-shadow: 0 0 20px rgba(88,192,52,0.15);
+  }
+  .price-card h3 { font-size: 1.25rem; margin-bottom: 0.25rem; }
+  .price-card .target { font-size: 0.8rem; opacity: 0.6; margin-bottom: 1rem; }
+  .price-card .price { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.25rem; }
+  .price-card .period { font-size: 0.85rem; opacity: 0.6; margin-bottom: 1rem; }
+  .price-card .feature { font-size: 0.8rem; opacity: 0.7; padding: 0.2rem 0; }
+  .price-card .feature strong { color: var(--accent); opacity: 1; }
+
+  /* Data sovereignty icons */
+  .data-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  .data-item { display: flex; align-items: start; gap: 0.75rem; }
+  .data-icon {
+    width: 40px; height: 40px; min-width: 40px;
+    background: rgba(88,192,52,0.15);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent);
+  }
+  .data-item h3 { font-size: 0.95rem; margin-bottom: 0.25rem; }
+  .data-item p { font-size: 0.8rem; opacity: 0.65; }
+
+  /* Navigation */
+  .nav-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 2rem;
+    background: rgba(15,18,24,0.85);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+    font-size: 0.8rem;
+  }
+  .nav-bar .logo { height: 20px; opacity: 0.6; }
+  .nav-bar .counter { opacity: 0.4; }
+  .nav-bar .controls { display: flex; gap: 0.5rem; }
+  .nav-bar button {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: white;
+    border-radius: 6px;
+    padding: 0.35rem 1rem;
+    font-family: inherit;
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+  .nav-bar button:hover { background: rgba(255,255,255,0.2); }
+
+  /* Fullscreen hint */
+  .fs-hint {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    font-size: 0.7rem;
+    opacity: 0.3;
+    z-index: 100;
+  }
+
+  /* Light slide overrides */
+  .slide-light .check-list li::before { color: var(--accent-dark); }
+  .slide-light .bullet-list li::before { color: var(--brand); }
+</style>
+</head>
+<body>
+
+<div class="slides">
+
+  <!-- Slide 1: Cover -->
+  <div class="slide slide-brand active" id="s1">
+    <div>
+      <img src="logo-full-dark.svg" alt="Balaka" height="48" style="margin-bottom:2rem;filter:brightness(10);">
+      <h1>Aplikasi Akunting<br>untuk Bisnis Indonesia</h1>
+      <p class="subtitle">Semua fitur. Tanpa batasan. Data milik Anda.</p>
+      <p class="small" style="margin-top:2rem;">PT Artivisi Intermedia &middot; balaka.id</p>
+    </div>
+  </div>
+
+  <!-- Slide 2: Problem -->
+  <div class="slide slide-dark" id="s2">
+    <h2>Pembukuan Bisnis Kecil<br>Masih <span class="accent">Berantakan</span></h2>
+    <ul class="bullet-list" style="max-width:700px;">
+      <li>60%+ UMKM masih pakai spreadsheet atau catatan manual</li>
+      <li>Laporan pajak (PPN, PPh 21, SPT Tahunan) dikerjakan manual — rawan salah, telat, kena denda</li>
+      <li>Penggajian + BPJS dihitung manual setiap bulan</li>
+      <li>Software yang lengkap harganya Rp 500K-2M+/bulan</li>
+      <li>Yang murah — fiturnya terbatas, transaksi dibatasi, pengguna dibatasi</li>
+      <li>Data bisnis Anda tersimpan di server luar negeri</li>
+    </ul>
+  </div>
+
+  <!-- Slide 3: Solution -->
+  <div class="slide slide-dark" id="s3">
+    <div class="cols cols-60-40">
+      <div>
+        <h2>Satu Aplikasi,<br><span class="accent">Semua Kebutuhan</span></h2>
+        <ul class="check-list">
+          <li>Pembukuan double-entry lengkap</li>
+          <li>Perpajakan Indonesia (PPN, PPh 21/23/Badan)</li>
+          <li>Penggajian + BPJS otomatis</li>
+          <li>Inventori & produksi (BOM)</li>
+          <li>Aset tetap & penyusutan</li>
+          <li>Faktur, tagihan, rekonsiliasi bank</li>
+          <li>Laporan keuangan & SPT export</li>
+        </ul>
+      </div>
+      <div>
+        <img src="https://artivisi.com/balaka/screenshots/service/dashboard.png" alt="Dashboard" class="screenshot">
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 4: Reports -->
+  <div class="slide slide-dark" id="s4">
+    <h2>Laporan Keuangan <span class="accent">Otomatis</span></h2>
+    <div class="screenshot-grid" style="margin-top:1rem;">
+      <img src="https://artivisi.com/balaka/screenshots/service/report-trial-balance.png" alt="Trial Balance" class="screenshot-sm">
+      <img src="https://artivisi.com/balaka/screenshots/service/report-income-statement.png" alt="Income Statement" class="screenshot-sm">
+      <img src="https://artivisi.com/balaka/screenshots/service/report-balance-sheet.png" alt="Balance Sheet" class="screenshot-sm">
+      <img src="https://artivisi.com/balaka/screenshots/reports-ppn-summary.png" alt="PPN Report" class="screenshot-sm">
+    </div>
+  </div>
+
+  <!-- Slide 5: Payroll -->
+  <div class="slide slide-dark" id="s5">
+    <div class="cols cols-60-40">
+      <div>
+        <h2>Penggajian + BPJS<br><span class="accent">Termasuk</span></h2>
+        <ul class="check-list">
+          <li>Hitung gaji, tunjangan, potongan</li>
+          <li>BPJS Kesehatan & Ketenagakerjaan otomatis</li>
+          <li>PPh 21 metode TER (terbaru)</li>
+          <li>Slip gaji self-service untuk karyawan</li>
+          <li>Bukti potong 1721-A1 per karyawan</li>
+        </ul>
+        <p class="small" style="margin-top:1rem;">Kompetitor mengenakan biaya tambahan untuk payroll. Di Balaka, sudah termasuk di semua paket.</p>
+      </div>
+      <div>
+        <img src="https://artivisi.com/balaka/screenshots/payroll-detail.png" alt="Payroll" class="screenshot">
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 6: Inventory & Manufacturing -->
+  <div class="slide slide-dark" id="s6">
+    <div class="cols cols-40-60">
+      <div>
+        <h2>Inventori &<br><span class="accent">Produksi</span></h2>
+        <ul class="check-list">
+          <li>Manajemen stok multi-gudang</li>
+          <li>Bill of Materials & Production Order</li>
+          <li>HPP otomatis (moving average)</li>
+          <li>Laporan profitabilitas per produk</li>
+        </ul>
+        <p class="small" style="margin-top:1rem;">Accurate: +Rp 2.2M/bln untuk manufaktur.<br>Kledo: hanya di paket Elite+.<br>Balaka: termasuk di semua paket.</p>
+      </div>
+      <div>
+        <img src="https://artivisi.com/balaka/screenshots/coffee/bom-detail-croissant.png" alt="BOM" class="screenshot" style="margin-bottom:1rem;">
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 7: Competitor comparison -->
+  <div class="slide slide-dark" id="s7">
+    <h2>Perbandingan <span class="accent">Kompetitor</span></h2>
+    <table class="table-dark" style="max-width:900px;">
+      <tr>
+        <th></th><th>Kledo</th><th>Jurnal</th><th>Accurate</th><th>Odoo</th><th style="color:var(--accent);">Balaka</th>
+      </tr>
+      <tr>
+        <td>Harga mulai</td><td>Rp 160K</td><td>Rp 499K</td><td>Rp 333K</td><td>Rp 110K/user</td><td style="color:var(--accent);font-weight:600;">Rp 149K</td>
+      </tr>
+      <tr>
+        <td>Semua fitur di semua paket</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td style="color:var(--accent);font-weight:600;">Ya</td>
+      </tr>
+      <tr>
+        <td>Batasan transaksi</td><td>1K-8K/bln</td><td>?</td><td>?</td><td>Tidak</td><td style="color:var(--accent);font-weight:600;">Tidak ada</td>
+      </tr>
+      <tr>
+        <td>Pengguna</td><td>1-5</td><td>Per user</td><td>Per user</td><td>Per user</td><td style="color:var(--accent);font-weight:600;">Unlimited</td>
+      </tr>
+      <tr>
+        <td>Payroll + BPJS</td><td>Tidak</td><td>Add-on</td><td>Tidak</td><td>Enterprise</td><td style="color:var(--accent);font-weight:600;">Termasuk</td>
+      </tr>
+      <tr>
+        <td>Manufaktur / BOM</td><td>Elite+</td><td>Enterprise</td><td>+Rp 2.2M/bln</td><td>Enterprise</td><td style="color:var(--accent);font-weight:600;">Termasuk</td>
+      </tr>
+      <tr>
+        <td>Open source</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Sebagian</td><td style="color:var(--accent);font-weight:600;">Ya</td>
+      </tr>
+      <tr>
+        <td>Server Indonesia</td><td>?</td><td>?</td><td>?</td><td>?</td><td style="color:var(--accent);font-weight:600;">Jakarta</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Slide 8: Pricing -->
+  <div class="slide slide-dark" id="s8">
+    <h2 style="text-align:center;">Semua Fitur, <span class="accent">Setiap Paket</span></h2>
+    <p style="text-align:center;opacity:0.6;margin-bottom:2rem;">Yang membedakan paket bukan fitur, tapi infrastruktur dan support.</p>
+    <div class="price-cards">
+      <div class="price-card">
+        <h3>Starter</h3>
+        <div class="target">Freelancer, usaha mikro</div>
+        <div class="price">Rp 149.000</div>
+        <div class="period">/bulan</div>
+        <div class="feature"><strong>Semua fitur</strong></div>
+        <div class="feature">Unlimited users & transaksi</div>
+        <div class="feature">Server bersama</div>
+        <div class="feature">Email support</div>
+      </div>
+      <div class="price-card featured">
+        <h3>Business</h3>
+        <div class="target">Usaha kecil, toko online</div>
+        <div class="price">Rp 349.000</div>
+        <div class="period">/bulan</div>
+        <div class="feature"><strong>Semua fitur</strong></div>
+        <div class="feature">Unlimited users & transaksi</div>
+        <div class="feature">Server bersama</div>
+        <div class="feature">WhatsApp support (same day)</div>
+      </div>
+      <div class="price-card">
+        <h3>Professional</h3>
+        <div class="target">UKM berkembang</div>
+        <div class="price">Rp 749.000</div>
+        <div class="period">/bulan</div>
+        <div class="feature"><strong>Semua fitur</strong></div>
+        <div class="feature">Unlimited users & transaksi</div>
+        <div class="feature">Server dedicated</div>
+        <div class="feature">WhatsApp prioritas (4 jam)</div>
+      </div>
+    </div>
+    <p style="text-align:center;opacity:0.4;margin-top:1.5rem;font-size:0.85rem;">Diskon tahunan: bayar 10 bulan, dapat 12.</p>
+  </div>
+
+  <!-- Slide 9: Data sovereignty -->
+  <div class="slide slide-dark" id="s9">
+    <h2>Data Anda <span class="accent">Milik Anda</span></h2>
+    <p class="subtitle" style="margin-bottom:2rem;">Transparansi penuh. Tanpa lock-in. Kapan saja bisa pergi — bawa semua data Anda.</p>
+    <div class="data-grid" style="max-width:700px;">
+      <div class="data-item">
+        <div class="data-icon">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+        </div>
+        <div>
+          <h3>Enkripsi AES-256</h3>
+          <p>Kunci enkripsi per instance — milik Anda, bukan kami</p>
+        </div>
+      </div>
+      <div class="data-item">
+        <div class="data-icon">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+        </div>
+        <div>
+          <h3>Ekspor Kapan Saja</h3>
+          <p>Satu klik untuk download semua data (CSV/Excel)</p>
+        </div>
+      </div>
+      <div class="data-item">
+        <div class="data-icon">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <div>
+          <h3>Server di Indonesia</h3>
+          <p>Data center Jakarta — compliance UU PDP</p>
+        </div>
+      </div>
+      <div class="data-item">
+        <div class="data-icon">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+        </div>
+        <div>
+          <h3>Source Code Terbuka</h3>
+          <p>Apache 2.0 — audit kapan saja, tanpa izin</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 10: Industries -->
+  <div class="slide slide-dark" id="s10">
+    <h2>4 Paket Industri <span class="accent">Siap Pakai</span></h2>
+    <div class="cols" style="margin-top:1rem;">
+      <div>
+        <table class="table-dark">
+          <tr><th>Paket</th><th>Fitur Khas</th></tr>
+          <tr><td><strong>Jasa IT / Konsultan</strong></td><td>Proyek, milestone, profitabilitas per klien</td></tr>
+          <tr><td><strong>Toko Online / Dagang</strong></td><td>Inventori, pembelian, penjualan, stok multi-gudang</td></tr>
+          <tr><td><strong>Kedai Kopi / Manufaktur</strong></td><td>BOM, production order, HPP otomatis</td></tr>
+          <tr><td><strong>Kampus / Pendidikan</strong></td><td>SPP, piutang mahasiswa, laporan per prodi</td></tr>
+        </table>
+        <p class="small" style="margin-top:1rem;">Pilih paket saat pendaftaran — Chart of Accounts, template transaksi, dan contoh data sudah disesuaikan.</p>
+      </div>
+      <div>
+        <img src="https://artivisi.com/balaka/screenshots/seller/report-product-profitability.png" alt="Product Profitability" class="screenshot" style="margin-bottom:1rem;">
+        <img src="https://artivisi.com/balaka/screenshots/coffee/production-order-detail-croissant.png" alt="Production Order" class="screenshot-sm">
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 11: Security & Quality -->
+  <div class="slide slide-dark" id="s11">
+    <div class="cols cols-60-40">
+      <div>
+        <h2>Enterprise-Grade,<br><span class="accent">Harga UMKM</span></h2>
+        <ul class="check-list">
+          <li>3500+ automated tests</li>
+          <li>OWASP ZAP — 0 vulnerabilities</li>
+          <li>Spring Boot 4 + Java 25 + PostgreSQL 18</li>
+          <li>Backup harian otomatis + enkripsi</li>
+          <li>Audit log untuk setiap perubahan</li>
+          <li>6 level akses (RBAC)</li>
+          <li>REST API — 123+ endpoint</li>
+        </ul>
+      </div>
+      <div>
+        <img src="https://artivisi.com/balaka/screenshots/service/journals-list.png" alt="Journals" class="screenshot" style="margin-bottom:1rem;">
+        <img src="https://artivisi.com/balaka/screenshots/bank-recon/recon-detail.png" alt="Bank Reconciliation" class="screenshot-sm">
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 12: About -->
+  <div class="slide slide-dark" id="s12">
+    <h2>Tentang <span class="accent">ArtiVisi</span></h2>
+    <div class="cols cols-60-40">
+      <div>
+        <ul class="bullet-list" style="font-size:1.1rem;">
+          <li><strong>PT Artivisi Intermedia</strong> — berdiri 2008, 18 tahun di industri IT</li>
+          <li>Klien: BNI, Pegadaian, KAI, Telkom</li>
+          <li>Keahlian: sistem pembayaran, keamanan transaksi, enterprise Java</li>
+          <li>Balaka dibangun dari kebutuhan internal — sudah dipakai untuk pembukuan ArtiVisi sendiri dan STMIK Tazkia</li>
+        </ul>
+        <p style="margin-top:2rem;font-style:italic;opacity:0.6;font-size:1rem;">"Kami bukan startup yang jual impian. Kami perusahaan IT yang membangun tools yang kami sendiri gunakan."</p>
+      </div>
+      <div style="text-align:center;">
+        <img src="https://artivisi.com/balaka/screenshots/service/templates-list.png" alt="Templates" class="screenshot">
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 13: CTA -->
+  <div class="slide slide-brand" id="s13">
+    <div style="text-align:center;">
+      <h1>Mulai Sekarang</h1>
+      <p class="subtitle" style="margin:0 auto 2rem;text-align:center;">Coba langsung di demo online, atau hubungi kami untuk memulai.</p>
+      <div style="font-size:1.2rem;margin-bottom:2rem;">
+        <p style="margin-bottom:0.5rem;"><strong>WhatsApp:</strong> 0812-9800-0468</p>
+        <p style="margin-bottom:0.5rem;"><strong>Email:</strong> info@artivisi.com</p>
+        <p><strong>Web:</strong> balaka.id</p>
+      </div>
+      <p style="opacity:0.6;font-size:0.9rem;">Demo online: demo-it.balaka.id &middot; demo-commerce.balaka.id &middot; demo-manufacturing.balaka.id &middot; demo-campus.balaka.id</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- Navigation bar -->
+<div class="nav-bar">
+  <img src="logo-full-dark.svg" alt="Balaka" class="logo" style="filter:brightness(10);">
+  <span class="counter"><span id="current">1</span> / <span id="total">13</span></span>
+  <div class="controls">
+    <button onclick="prev()">&#9664; Prev</button>
+    <button onclick="next()">Next &#9654;</button>
+  </div>
+</div>
+
+<div class="fs-hint">Tekan F11 untuk fullscreen</div>
+
+<script>
+let current = 0;
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+document.getElementById('total').textContent = total;
+
+function show(n) {
+  slides[current].classList.remove('active');
+  current = ((n % total) + total) % total;
+  slides[current].classList.add('active');
+  document.getElementById('current').textContent = current + 1;
+}
+
+function next() { show(current + 1); }
+function prev() { show(current - 1); }
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); next(); }
+  if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
+  if (e.key === 'Home') { e.preventDefault(); show(0); }
+  if (e.key === 'End') { e.preventDefault(); show(total - 1); }
+});
+
+// Touch swipe support
+let touchStart = 0;
+document.addEventListener('touchstart', e => { touchStart = e.changedTouches[0].clientX; });
+document.addEventListener('touchend', e => {
+  const diff = e.changedTouches[0].clientX - touchStart;
+  if (Math.abs(diff) > 50) { diff < 0 ? next() : prev(); }
+});
+</script>
+
+</body>
+</html>
