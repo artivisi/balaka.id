@@ -397,6 +397,160 @@ ul { list-style: none; }
 
 @media (max-width: 768px) { .security-grid { grid-template-columns: 1fr; } }
 
+/* ===== Pricing Grid ===== */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.pricing-card {
+  background: white;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.pricing-card-featured {
+  border-color: var(--brand);
+  border-width: 2px;
+  box-shadow: var(--shadow-lg);
+}
+.pricing-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--brand);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.25rem 1rem;
+  border-radius: 20px;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.pricing-header h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--slate-900);
+  margin-bottom: 0.25rem;
+}
+.pricing-target {
+  font-size: 0.8rem;
+  color: var(--slate-500);
+  margin-bottom: 1.25rem;
+}
+.pricing-price {
+  margin-bottom: 1.5rem;
+}
+.pricing-amount {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--slate-900);
+}
+.pricing-period {
+  font-size: 0.9rem;
+  color: var(--slate-500);
+  font-weight: 400;
+}
+.pricing-features {
+  flex: 1;
+  margin-bottom: 1.5rem;
+  padding-left: 0;
+}
+.pricing-features li {
+  font-size: 0.85rem;
+  color: var(--slate-600);
+  padding: 0.4rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+}
+.pricing-features li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+.btn-block {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.pricing-notes {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.pricing-notes p {
+  font-size: 0.85rem;
+  color: var(--slate-500);
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.pricing-data-sovereignty {
+  background: white;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius);
+  padding: 2rem;
+  text-align: center;
+}
+.pricing-data-sovereignty h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--slate-900);
+  margin-bottom: 1.25rem;
+}
+.data-points {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.data-point {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--slate-600);
+}
+.data-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--brand);
+}
+
+@media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; } }
+@media (max-width: 600px) { .data-points { flex-direction: column; align-items: center; } }
+
+/* ===== WhatsApp Float ===== */
+.wa-float {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 56px;
+  height: 56px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+  z-index: 99;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.wa-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(37, 211, 102, 0.5);
+}
+
 /* ===== CTA ===== */
 .cta-section {
   background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);
@@ -543,6 +697,20 @@ ul { list-style: none; }
   .security-card { background: #1a1f2b; border-color: #2a3040; }
   .security-card h3 { color: #7b8adb; }
   .security-card li { color: #a0aab8; }
+
+  /* Pricing cards */
+  .pricing-card { background: #1a1f2b; border-color: #2a3040; }
+  .pricing-card-featured { border-color: #7b8adb; }
+  .pricing-header h3 { color: #e8ecf2; }
+  .pricing-target { color: #8090a4; }
+  .pricing-amount { color: #e8ecf2; }
+  .pricing-period { color: #8090a4; }
+  .pricing-features li { color: #a0aab8; }
+  .pricing-notes p { color: #8090a4; }
+  .pricing-data-sovereignty { background: #1a1f2b; border-color: #2a3040; }
+  .pricing-data-sovereignty h3 { color: #e8ecf2; }
+  .data-point { color: #a0aab8; }
+  .data-icon { color: #7b8adb; }
 
   /* CTA — keep brand gradient, just adjust outline btn */
   .cta-section .btn-outline { color: white; border-color: rgba(255,255,255,0.4); }
