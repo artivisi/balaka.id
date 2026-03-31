@@ -44,9 +44,10 @@
     display: none;
     flex-direction: column;
     justify-content: center;
-    padding: 4rem 6rem;
+    padding: 3rem 6rem 4rem;
     overflow: hidden;
   }
+  .slide .cols { max-height: calc(100vh - 10rem); overflow: hidden; }
   .slide.active { display: flex; }
 
   /* Slide backgrounds */
@@ -111,13 +112,15 @@
   .screenshot {
     border-radius: 8px;
     box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-    max-height: 70vh;
+    max-height: 55vh;
+    max-width: 100%;
     object-fit: contain;
   }
   .screenshot-sm {
     border-radius: 6px;
     box-shadow: 0 4px 16px rgba(0,0,0,0.3);
-    max-height: 35vh;
+    max-height: 28vh;
+    max-width: 100%;
     object-fit: contain;
   }
   .screenshot-grid {
@@ -125,6 +128,7 @@
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
   }
+  .screenshot-grid .screenshot-sm { max-height: 32vh; }
 
   /* Tables */
   table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
@@ -446,8 +450,7 @@
         <p class="small" style="margin-top:1rem;">Pilih paket saat pendaftaran — Chart of Accounts, template transaksi, dan contoh data sudah disesuaikan.</p>
       </div>
       <div>
-        <img src="https://artivisi.com/balaka/screenshots/seller/report-product-profitability.png" alt="Product Profitability" class="screenshot" style="margin-bottom:1rem;">
-        <img src="https://artivisi.com/balaka/screenshots/coffee/production-order-detail-croissant.png" alt="Production Order" class="screenshot-sm">
+        <img src="https://artivisi.com/balaka/screenshots/seller/report-product-profitability.png" alt="Product Profitability" class="screenshot">
       </div>
     </div>
   </div>
@@ -468,8 +471,7 @@
         </ul>
       </div>
       <div>
-        <img src="https://artivisi.com/balaka/screenshots/service/journals-list.png" alt="Journals" class="screenshot" style="margin-bottom:1rem;">
-        <img src="https://artivisi.com/balaka/screenshots/bank-recon/recon-detail.png" alt="Bank Reconciliation" class="screenshot-sm">
+        <img src="https://artivisi.com/balaka/screenshots/bank-recon/recon-detail.png" alt="Bank Reconciliation" class="screenshot">
       </div>
     </div>
   </div>
