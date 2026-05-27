@@ -252,7 +252,12 @@ ul { list-style: none; }
   border-radius: var(--radius);
   padding: 1.5rem;
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
+/* pin the demo button to the bottom so it aligns across cards of unequal text height */
+.industry-demo { margin-top: auto; align-self: center; }
+.industry-card p { margin-bottom: 1.25rem; }
 .industry-icon {
   width: 56px;
   height: 56px;
