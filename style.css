@@ -796,3 +796,63 @@ ul { list-style: none; }
   /* Footer — already dark, just deepen slightly to differentiate */
   .footer { background: #080b10; }
 }
+
+/* Demo credentials card (industries section) */
+.demo-creds {
+  max-width: 580px;
+  margin: 2rem auto 0;
+  padding: 1.25rem 1.5rem 1.4rem;
+  background: var(--brand-50);
+  border: 1px solid var(--brand-100);
+  border-radius: 14px;
+  text-align: left;
+}
+.demo-creds-lead {
+  margin: 0 0 0.9rem;
+  text-align: center;
+  color: var(--slate-700);
+  font-size: 0.95rem;
+}
+.demo-creds-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.demo-creds-table th {
+  text-align: left;
+  padding: 0.35rem 0.6rem;
+  border-bottom: 1px solid var(--brand-100);
+  color: var(--slate-500);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.demo-creds-table td {
+  padding: 0.45rem 0.6rem;
+  border-bottom: 1px solid var(--brand-100);
+  color: var(--slate-600);
+  vertical-align: middle;
+}
+.demo-creds-table tr:last-child td { border-bottom: none; }
+.demo-creds code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  background: #fff;
+  border: 1px solid var(--brand-100);
+  border-radius: 6px;
+  padding: 0.12rem 0.5rem;
+  font-size: 0.85em;
+  color: var(--brand);
+}
+.demo-creds .demo-pass { font-weight: 700; }
+.demo-creds-note {
+  margin: 0.95rem 0 0;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--slate-500);
+}
+
+@media (prefers-color-scheme: dark) {
+  .demo-creds { background: #1a1f2b; border-color: #2a3040; }
+  .demo-creds-lead { color: #c0c8d4; }
+  .demo-creds-table th { color: #8090a4; border-color: #2a3040; }
+  .demo-creds-table td { color: #b8c0cc; border-color: #2a3040; }
+  .demo-creds code { background: #0f1320; border-color: #2a3040; color: #9aa6e8; }
+  .demo-creds-note { color: #8090a4; }
+}
